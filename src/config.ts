@@ -6,7 +6,7 @@
  */
 
 export default {
-    environment: 'development',
-    appName: 'MyApplication',
-    appDescription: 'MyApplication description',
+  environment: "development",
+  appName: "MyApplication",
+  appDescription: "MyApplication description",
 };

@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { RouterLocation } from '@vaadin/router';
-import { LitElement } from 'lit';
-import type { PropertyValues } from 'lit';
-import { state } from 'lit/decorators.js';
+import type { RouterLocation } from "@vaadin/router";
+import { LitElement } from "lit";
+import type { PropertyValues } from "lit";
+import { state } from "lit/decorators.js";
 
-import config from '../config.js';
-import { updateMeta } from './html-meta-manager/index.js';
-import type { MetaOptions } from './html-meta-manager/index.js';
+import config from "../config.js";
+import { updateMeta } from "./html-meta-manager/index.js";
+import type { MetaOptions } from "./html-meta-manager/index.js";
 
 export class PageElement extends LitElement {
   @state()

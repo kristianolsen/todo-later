@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 interface ImageMetaOptions {
-    url: string;
-    alt?: string;
-    width?: string;
-    height?: string;
+  url: string;
+  alt?: string;
+  width?: string;
+  height?: string;
 }
 export interface MetaOptions {
-    title?: string;
-    titleTemplate?: string | null;
-    description?: string | null;
-    image?: ImageMetaOptions | null;
-    url?: string;
+  title?: string;
+  titleTemplate?: string | null;
+  description?: string | null;
+  image?: ImageMetaOptions | null;
+  url?: string;
 }
 export declare const updateMeta: (options: MetaOptions) => void;
 export {};

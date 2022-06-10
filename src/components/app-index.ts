@@ -5,20 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html, css } from 'lit';
-import { customElement, query } from 'lit/decorators.js';
+import { LitElement, html, css } from "lit";
+import { customElement, query } from "lit/decorators.js";
 
-import { attachRouter, urlForName } from '../router/index.js';
+import { attachRouter, urlForName } from "../router/index.js";
 
-import 'pwa-helper-components/pwa-install-button.js';
-import 'pwa-helper-components/pwa-update-available.js';
+import "pwa-helper-components/pwa-install-button.js";
+import "pwa-helper-components/pwa-update-available.js";
 
-@customElement('app-index')
+@customElement("app-index")
 export class AppIndex extends LitElement {
-    @query('main')
-    private main!: HTMLElement;
+  @query("main")
+  private main!: HTMLElement;
 
-    static override styles = css`
+  static override styles = css`
     :host {
       display: flex;
       flex-direction: column;
@@ -64,12 +64,12 @@ export class AppIndex extends LitElement {
     }
   `;
 
-    override render() {
-        return html`
+  override render() {
+    return html`
       <header>
         <nav>
-          <a href="${urlForName('home')}">Now</a>
-          <a href="${urlForName('about')}">Later</a>
+          <a href="${urlForName("home")}">Now</a>
+          <a href="${urlForName("about")}">Later</a>
         </nav>
         <pwa-install-button>
           <button>Install app</button>
@@ -80,11 +80,10 @@ export class AppIndex extends LitElement {
       </header>
       <!-- The main content is added / removed dynamically by the router -->
       <main role="main"></main>
-      
     `;
-    }
+  }
 
-    override firstUpdated() {
-        attachRouter(this.main);
-    }
+  override firstUpdated() {
+    attachRouter(this.main);
+  }
 }

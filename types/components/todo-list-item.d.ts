@@ -3,7 +3,7 @@
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-import { LitElement } from 'lit';
+import { LitElement } from "lit";
 /**
  * An example element.
  *
@@ -12,33 +12,33 @@ import { LitElement } from 'lit';
  * @csspart button - The button
  */
 export declare class TodoListItem extends LitElement {
-    static styles: import("lit").CSSResult;
-    constructor();
-    /**
-     * The name to say "Hello" to.
-     */
-    label: string;
-    checked: boolean;
-    repeated: boolean;
-    edit: boolean;
-    swipe: boolean;
-    isSwiping: boolean;
-    mouseOrigin: number;
-    startSwipe(evt: PointerEvent): void;
-    private completing;
-    private deleting;
-    private postponing;
-    private marginOffset;
-    private dragged;
-    endSwipe(evt: PointerEvent): void;
-    detectMouse(evt: PointerEvent): void;
-    private editingName;
-    private itemNameInput;
-    private updateName;
-    render(): import("lit-html").TemplateResult<1>;
+  static styles: import("lit").CSSResult;
+  constructor();
+  /**
+   * The name to say "Hello" to.
+   */
+  label: string;
+  checked: boolean;
+  repeated: boolean;
+  edit: boolean;
+  swipe: boolean;
+  isSwiping: boolean;
+  mouseOrigin: number;
+  startSwipe(evt: PointerEvent): void;
+  private completing;
+  private deleting;
+  private postponing;
+  private marginOffset;
+  private dragged;
+  endSwipe(evt: PointerEvent): void;
+  detectMouse(evt: PointerEvent): void;
+  private editingName;
+  private itemNameInput;
+  private updateName;
+  render(): import("lit-html").TemplateResult<1>;
 }
 declare global {
-    interface HTMLElementTagNameMap {
-        'todo-list-item': TodoListItem;
-    }
+  interface HTMLElementTagNameMap {
+    "todo-list-item": TodoListItem;
+  }
 }

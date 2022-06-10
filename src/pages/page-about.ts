@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { html, css } from "lit";
+import { customElement } from "lit/decorators.js";
 
-import { PageElement } from '../helpers/page-element.js';
+import { PageElement } from "../helpers/page-element.js";
 
-@customElement('page-about')
+@customElement("page-about")
 export class PageAbout extends PageElement {
   static override styles = css`
     section {
@@ -35,8 +35,8 @@ export class PageAbout extends PageElement {
 
   override meta() {
     return {
-      title: 'About',
-      description: 'About page description',
+      title: "About",
+      description: "About page description",
     };
   }
 }

@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { html, css } from "lit";
+import { customElement } from "lit/decorators.js";
 
 import {
   PageElementNotFound,
   pageNotFoundMeta,
-} from '../helpers/page-element-not-found.js';
-import { urlForName } from '../router/index.js';
+} from "../helpers/page-element-not-found.js";
+import { urlForName } from "../router/index.js";
 
-@customElement('page-not-found')
+@customElement("page-not-found")
 export class PageNotFound extends PageElementNotFound {
   static override styles = css`
     :host {
@@ -33,7 +33,7 @@ export class PageNotFound extends PageElementNotFound {
         <h1>Page not found</h1>
 
         <p>
-          <a href="${urlForName('home')}">Back to home</a>
+          <a href="${urlForName("home")}">Back to home</a>
         </p>
       </section>
     `;

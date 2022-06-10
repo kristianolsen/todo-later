@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { setMetaTag, setLinkTag } from './utils.js';
+import { setMetaTag, setLinkTag } from "./utils.js";
 
 interface ImageMetaOptions {
   url: string;
@@ -27,43 +27,43 @@ export const updateMeta = (options: MetaOptions) => {
 
   if (title) {
     const finalTitle = titleTemplate
-      ? titleTemplate.replace('%s', title)
+      ? titleTemplate.replace("%s", title)
       : title;
 
     document.title = finalTitle;
-    setMetaTag('property', 'og:title', finalTitle);
+    setMetaTag("property", "og:title", finalTitle);
   }
 
   if (description) {
-    setMetaTag('name', 'description', description);
-    setMetaTag('property', 'og:description', description);
+    setMetaTag("name", "description", description);
+    setMetaTag("property", "og:description", description);
   } else if (description === null) {
-    setMetaTag('name', 'description', '');
-    setMetaTag('property', 'og:description', '');
+    setMetaTag("name", "description", "");
+    setMetaTag("property", "og:description", "");
   }
 
   if (image) {
     if (image.url) {
-      setMetaTag('property', 'og:image', image.url);
+      setMetaTag("property", "og:image", image.url);
     }
     if (image.alt) {
-      setMetaTag('property', 'og:image:alt', image.alt);
+      setMetaTag("property", "og:image:alt", image.alt);
     }
     if (image.width) {
-      setMetaTag('property', 'og:image:width', image.width);
+      setMetaTag("property", "og:image:width", image.width);
     }
     if (image.height) {
-      setMetaTag('property', 'og:image:height', image.height);
+      setMetaTag("property", "og:image:height", image.height);
     }
   } else if (image === null) {
-    setMetaTag('property', 'og:image', '');
-    setMetaTag('property', 'og:image:alt', '');
-    setMetaTag('property', 'og:image:width', '');
-    setMetaTag('property', 'og:image:height', '');
+    setMetaTag("property", "og:image", "");
+    setMetaTag("property", "og:image:alt", "");
+    setMetaTag("property", "og:image:width", "");
+    setMetaTag("property", "og:image:height", "");
   }
 
   if (url) {
-    setLinkTag('canonical', url);
-    setMetaTag('property', 'og:url', url);
+    setLinkTag("canonical", url);
+    setMetaTag("property", "og:url", url);
   }
 };

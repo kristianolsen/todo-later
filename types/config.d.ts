@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 declare const _default: {
-    environment: string;
-    appName: string;
-    appDescription: string;
+  environment: string;
+  appName: string;
+  appDescription: string;
 };
 export default _default;

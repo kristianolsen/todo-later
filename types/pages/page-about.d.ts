@@ -4,12 +4,12 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { PageElement } from '../helpers/page-element.js';
+import { PageElement } from "../helpers/page-element.js";
 export declare class PageAbout extends PageElement {
-    static styles: import("lit").CSSResult;
-    render(): import("lit-html").TemplateResult<1>;
-    meta(): {
-        title: string;
-        description: string;
-    };
+  static styles: import("lit").CSSResult;
+  render(): import("lit-html").TemplateResult<1>;
+  meta(): {
+    title: string;
+    description: string;
+  };
 }
