@@ -1,15 +1,38 @@
 {
+  "name": "vite-project",
   "private": true,
+  "version": "0.0.0",
+  "main": "dist/my-element.es.js",
+  "exports": {
+    ".": "./dist/my-element.es.js"
+  },
+  "types": "types/my-element.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
-    "next": "latest",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "styletron-engine-atomic": "1.4.6",
-    "styletron-react": "5.2.7"
+    "@vaadin/router": "^1.7.4",
+    "html5sortable": "^0.13.3",
+    "lit": "^2.2.5",
+    "nanoid": "^4.0.0",
+    "pwa-helper-components": "~0.2.10",
+    "sortablejs": "^1.15.0",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.5.8",
+    "@storybook/addon-essentials": "^6.5.8",
+    "@storybook/addon-links": "^6.5.8",
+    "@storybook/builder-webpack4": "^6.5.8",
+    "@storybook/manager-webpack4": "^6.5.8",
+    "@storybook/web-components": "^6.5.8",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.9"
   }
 }
