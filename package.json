@@ -22,17 +22,16 @@
     "lit": "^2.2.5",
     "nanoid": "^4.0.0",
     "pwa-helper-components": "~0.2.10",
-    "sortablejs": "^1.15.0",
-    "tslib": "^2.4.0"
+    "sortablejs": "^1.15.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.5.8",
-    "@storybook/addon-essentials": "^6.5.8",
-    "@storybook/addon-links": "^6.5.8",
-    "@storybook/builder-webpack4": "^6.5.8",
-    "@storybook/manager-webpack4": "^6.5.8",
-    "@storybook/web-components": "^6.5.8",
-    "typescript": "^4.5.4",
-    "vite": "^2.9.9"
+    "@storybook/addon-actions": "6.5.8",
+    "@storybook/addon-essentials": "6.5.8",
+    "@storybook/addon-links": "6.5.8",
+    "@storybook/builder-webpack4": "6.5.8",
+    "@storybook/manager-webpack4": "6.5.8",
+    "@storybook/web-components": "6.5.8",
+    "typescript": "4.7.3",
+    "vite": "2.9.11"
   }
 }
