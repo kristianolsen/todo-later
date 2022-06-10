@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="608fd01d-f95f-4e58-9cab-7807fecf1e12" name="arriba" url="https://todo-later.arriba.no">
+        <fileTransfer rootFolder="/todo-later" host="ftp.arriba.no" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
