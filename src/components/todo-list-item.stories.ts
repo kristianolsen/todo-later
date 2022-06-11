@@ -15,9 +15,9 @@ const Template: Story<TodoListItem> = ({
   repeated,
 }) => html`<todo-list-item
   .label=${label}
-  ?checked="${checked},"
-  ?edit="${edit},"
-  ?repeated="${repeated},"
+  ?checked=${checked}
+  ?edit=${edit}
+  ?repeated=${repeated}
 ></todo-list-item>`;
 
 export const Default = Template.bind({});

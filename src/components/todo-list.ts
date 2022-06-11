@@ -33,8 +33,8 @@ export class TodoList extends LitElement {
       display: block;
       padding: 0;
 
-      background: #24292e;
-      font-family: sans-serif;
+      xbackground: #24292e;
+      font-family: serif;
       line-height: 1.15;
       -webkit-text-size-adjust: 100%;
       -webkit-tap-highlight-color: transparent;
@@ -282,7 +282,8 @@ export class TodoList extends LitElement {
     .h4,
     h4 {
       font-size: 1.5rem;
-      color: white;
+      acolor: white;
+        
     }
 
     .blue-background-class {
@@ -313,7 +314,7 @@ export class TodoList extends LitElement {
       ? nothing
       : html`
           <div
-            style="padding: 18px; display: flex; justify-content: space-between;"
+            style="padding: 18px; display: flex; justify-content: space-between; border-bottom: 2px solid grey; margin-bottom: 8px;"
           >
             ${this.editingName
               ? html`

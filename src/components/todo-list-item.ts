@@ -32,15 +32,15 @@ export class TodoListItem extends LitElement {
     }
 
     .item {
-      color: #fff;
+      color: black;
       height: auto;
       min-height: 40px;
       line-height: 2;
       padding: 8px 20px;
       z-index: 2;
-      border-bottom: 2px solid green;
+      border-bottom: 1px solid grey;
       position: relative;
-      background: #2f3d9a;
+      background: white;
       transition: background-color 1s;
     }
 
@@ -71,7 +71,7 @@ export class TodoListItem extends LitElement {
     }
 
     .item:not(.completed):not(.completing) {
-      border-bottom: 2px solid #d44a29;
+      border-bottom: 1px solid grey;
     }
 
     .item.completing {
@@ -81,8 +81,9 @@ export class TodoListItem extends LitElement {
 
     .item.completed {
       xopacity: 0.5;
+      color: grey;
       text-decoration: line-through;
-      background-color: #323232;
+      xbackground-color: #323232;
     }
 
     .item.deleting {
@@ -100,7 +101,7 @@ export class TodoListItem extends LitElement {
       fill: white;
     }
 
-    .item {
+    .itemx {
       background-color: #e3252c;
     }
   `;
@@ -305,8 +306,6 @@ export class TodoListItem extends LitElement {
         @pointerdown=${this.startSwipe}
         @pointermove=${this.detectMouse}
         @pointerup=${this.endSwipe}
-        @pointerleave=${this.endSwipe}
-        @pointerout=${this.endSwipe}
       >
         ${this.edit
           ? html`

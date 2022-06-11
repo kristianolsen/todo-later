@@ -5,8 +5,6 @@ S
 ,.idea/inspectionProfiles/Project_Default.xml,4/9/496a238a6afa168dbaf6efd37bb459331589579c
 Y
 )vite-project/src/Introduction.stories.mdx,c/b/cbf199d256dd14ddae17c58258a9a38782eee3d1
-A
-src/my-element.ts,2/7/272d468c8b4025e31df21f5f65f1be6db10ef794
 I
 web-dev-server.config.mjs,d/2/d277b8d99091fa0380e3f25db711ee85fba2db23
 J
@@ -19,15 +17,8 @@ P
 rollup.config.js,2/6/26100816530e53d31ed430fdf792b464f9fb0e3e
 T
 $vite-project/src/pages/page-about.ts,c/c/cc53d34b75377b6e430f4affeade61fd2529ccfd
-=
-tsconfig.json,6/1/61ebb9fd6e8cf9082658121d5d81e297791dacd0
 B
 tsconfig.node.json,c/d/cd346bdc6f8eee39e4d280aa9a6f7949c2133a71
->
-vite.config.ts,7/5/75ea7f3ea6d80d54bb5b2357996972d1632a5038
-:
-
-index.html,f/6/f6013a00b362253c64368d6eebc50ea2131754e2
 X
 (vite-project/src/pages/page-not-found.ts,f/7/f736f033ac0ec2732d1b8ca103f921eb3775020d
 X

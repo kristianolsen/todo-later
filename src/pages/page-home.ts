@@ -10,7 +10,6 @@ import { customElement, query, state } from "lit/decorators.js";
 
 import config from "../config.js";
 import { PageElement } from "../helpers/page-element.js";
-import { until } from "lit/directives/until.js";
 import "../components/todo-list";
 import { List } from "../components/todo-list";
 import { nanoid } from "nanoid";
@@ -39,10 +38,13 @@ export class PageHome extends PageElement {
     });
   }
 
+  connectedCallback() {
+   if (this.data) {
+     this.fetchData().then(r => console.log(r));
+   }
+  }
+
   private renderLists() {
-    if (this.data === undefined) {
-      return nothing;
-    }
     return this.filteredLists.map(
       (list) => html`
         <todo-list
@@ -71,12 +73,15 @@ export class PageHome extends PageElement {
   @state()
   private addingList = false;
 
+  private fetchData() {
+    return fetch("https://todo-later.arriba.no/data.php")
+        .then((r) => r.json())
+        .then((r) => (this.data = r))
+        .then(() => this.checkList());
+  }
+
+
   override render() {
-    const content = fetch("https://todo-later.arriba.no/data.php")
-      .then((r) => r.json())
-      .then((r) => (this.data = r))
-      .then(() => this.checkList())
-      .then(() => this.renderLists());
     return html`
       <div style="display: flex; justify-content: space-between;">
         <h1 @click=${() => (this.showNow = !this.showNow)}>
@@ -105,6 +110,7 @@ export class PageHome extends PageElement {
 
       ${this.addingList
         ? html` <div style="display: flex;">
+            ${this.renderLists()}
             <input
               style="flex: 1; font-family: sans-serif; font-size: 24px; font-weight: 500; padding: 10px;"
               id="newListName"
@@ -113,7 +119,7 @@ export class PageHome extends PageElement {
             ><button @click=${this.addList}>Add list</button>
           </div>`
         : nothing}
-      ${until(content, html`<span>Loading...</span>`)}
+      
     `;
   }
 
@@ -159,7 +165,7 @@ export class PageHome extends PageElement {
     } catch (res_1) {
       console.log(res_1);
     }
-    this.requestUpdate();
+    // TODO this.requestUpdate();
   }
 
   override meta() {
