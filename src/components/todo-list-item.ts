@@ -35,10 +35,10 @@ export class TodoListItem extends LitElement {
       color: black;
       height: auto;
       min-height: 40px;
-      line-height: 2;
+      xline-height: 2;
       padding: 8px 20px;
       z-index: 2;
-      border-bottom: 1px solid grey;
+      vborder-bottom: 1px solid grey;
       position: relative;
       background: white;
       transition: background-color 1s;
@@ -71,7 +71,7 @@ export class TodoListItem extends LitElement {
     }
 
     .item:not(.completed):not(.completing) {
-      border-bottom: 1px solid grey;
+      vborder-bottom: 1px solid grey;
     }
 
     .item.completing {
@@ -303,9 +303,9 @@ export class TodoListItem extends LitElement {
         style="${styleMap({
           transform: "translate3d(" + this.marginOffset + "px, 0, 0)",
         })}"
-        @pointerdown=${this.startSwipe}
-        @pointermove=${this.detectMouse}
-        @pointerup=${this.endSwipe}
+        @pointerdownx=${this.startSwipe}
+        @pointermovex=${this.detectMouse}
+        @pointerupx=${this.endSwipe}
       >
         ${this.edit
           ? html`

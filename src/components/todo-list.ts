@@ -6,7 +6,6 @@
 
 import { LitElement, html, css, nothing } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
-import Sortable from "sortablejs";
 import "./todo-list-item";
 
 export interface List {
@@ -283,7 +282,7 @@ export class TodoList extends LitElement {
     h4 {
       font-size: 1.5rem;
       acolor: white;
-        
+        xborder-bottom: 2px solid grey; 
     }
 
     .blue-background-class {
@@ -314,7 +313,7 @@ export class TodoList extends LitElement {
       ? nothing
       : html`
           <div
-            style="padding: 18px; display: flex; justify-content: space-between; border-bottom: 2px solid grey; margin-bottom: 8px;"
+            style="margin: 18px; display: flex; justify-content: space-between;border-bottom: 2px solid grey; "
           >
             ${this.editingName
               ? html`
@@ -333,10 +332,10 @@ export class TodoList extends LitElement {
                 </h4> `}
             ${this.addingItem
               ? nothing
-              : html`<div @click=${() => (this.addingItem = true)}>
+              : html`<div @click=${() => (this.addingItem = true)} style="margin-right: 20px;">
                   <svg
                     class="svg-icon"
-                    style="width: 2em; height: 2em;vertical-align: middle;fill: white;overflow: hidden;"
+                    style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;"
                     viewBox="0 0 1024 1024"
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -419,7 +418,7 @@ export class TodoList extends LitElement {
     this.editingName = false;
   }
 
-  private sortable?: Sortable;
+  // private slip?: Slip;
 
   override firstUpdated() {
     if ("getElementById" in this.renderRoot) {
@@ -434,7 +433,9 @@ export class TodoList extends LitElement {
       });
 
        */
-      console.log(this.sortable);
+
+      //  this.slip = new Slip(s);
+      // console.log(this.slip);
     }
   }
 
