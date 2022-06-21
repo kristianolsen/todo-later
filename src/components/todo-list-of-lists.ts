@@ -132,14 +132,15 @@ export class TodoListOfLists extends LitElement {
                     const n = this.newListNameInput.value;
                     draft.push({id: nanoid(), name: n, items: []});
                 this.newListNameInput.value = "";
-                this.dispatchEvent(
-                    new CustomEvent("lists-changed", {
-                        bubbles: true,
-                        composed: true,
-                        detail: {lists: this.lists},
-                    })
-                );
+
                 }    });
+        this.dispatchEvent(
+            new CustomEvent("lists-changed", {
+                bubbles: true,
+                composed: true,
+                detail: {lists: this.lists},
+            })
+        );
 
         this.addingList = false;
     }
@@ -152,16 +153,17 @@ export class TodoListOfLists extends LitElement {
                 const item = list.items.find((i) => i.id === id);
                 if (item !== undefined) {
                     item.checked = checked;
-                    this.dispatchEvent(
-                        new CustomEvent("lists-changed", {
-                            bubbles: true,
-                            composed: true,
-                            detail: {lists: this.lists},
-                        })
-                    );
+
                 }
             }
         });
+        this.dispatchEvent(
+            new CustomEvent("lists-changed", {
+                bubbles: true,
+                composed: true,
+                detail: {lists: this.lists},
+            })
+        );
     }
 
     private async laterUpdated(listId: string, id: string, later: boolean) {
@@ -172,16 +174,17 @@ export class TodoListOfLists extends LitElement {
                 const item = list.items.find((i) => i.id === id);
                 if (item !== undefined) {
                     item.later = later;
-                    this.dispatchEvent(
-                        new CustomEvent("lists-changed", {
-                            bubbles: true,
-                            composed: true,
-                            detail: {lists: this.lists},
-                        })
-                    );
+
                 }
             }
         });
+        this.dispatchEvent(
+            new CustomEvent("lists-changed", {
+                bubbles: true,
+                composed: true,
+                detail: {lists: this.lists},
+            })
+        );
     }
     private async deleteItem(listId: string, id: string) {
         if (this.lists === undefined) return;
@@ -189,15 +192,16 @@ export class TodoListOfLists extends LitElement {
             const list = draft.find((l) => l.id === listId);
             if (list !== undefined) {
                 list.items = list.items.filter((i) => i.id !== id);
-                this.dispatchEvent(
-                    new CustomEvent("lists-changed", {
-                        bubbles: true,
-                        composed: true,
-                        detail: {lists: this.lists},
-                    })
-                );
+
             }
         });
+        this.dispatchEvent(
+            new CustomEvent("lists-changed", {
+                bubbles: true,
+                composed: true,
+                detail: {lists: this.lists},
+            })
+        );
     }
 
     private async listNameChanged(listId: string, name: string) {
@@ -206,15 +210,16 @@ export class TodoListOfLists extends LitElement {
             const list = draft.find((l) => l.id === listId);
             if (list !== undefined) {
                 list.name = name;
-                this.dispatchEvent(
-                    new CustomEvent("lists-changed", {
-                        bubbles: true,
-                        composed: true,
-                        detail: {lists: this.lists},
-                    })
-                );
+
             }
         });
+        this.dispatchEvent(
+            new CustomEvent("lists-changed", {
+                bubbles: true,
+                composed: true,
+                detail: {lists: this.lists},
+            })
+        );
     }
 
     private async itemNameChanged(listId: string, id: string, name: string) {
@@ -225,16 +230,17 @@ export class TodoListOfLists extends LitElement {
                 const item = list.items.find((i) => i.id === id);
                 if (item !== undefined) {
                     item.name = name;
-                    this.dispatchEvent(
-                        new CustomEvent("lists-changed", {
-                            bubbles: true,
-                            composed: true,
-                            detail: {lists: this.lists},
-                        })
-                    );
+
                 }
             }
         });
+        this.dispatchEvent(
+            new CustomEvent("lists-changed", {
+                bubbles: true,
+                composed: true,
+                detail: {lists: this.lists},
+            })
+        );
     }
     private async itemRepeatedChanged(
         listId: string,
@@ -248,16 +254,17 @@ export class TodoListOfLists extends LitElement {
             const item = list.items.find((i) => i.id === id);
             if (item !== undefined) {
                 item.repeated = repeated;
-                this.dispatchEvent(
-                    new CustomEvent("lists-changed", {
-                        bubbles: true,
-                        composed: true,
-                        detail: { lists: this.lists },
-                    })
-                );
+
             }
         }
     });
+        this.dispatchEvent(
+            new CustomEvent("lists-changed", {
+                bubbles: true,
+                composed: true,
+                detail: { lists: this.lists },
+            })
+        );
     }
     private async addItem(listId: string, name: string) {
         if (this.lists === undefined) return;
@@ -272,16 +279,16 @@ export class TodoListOfLists extends LitElement {
                     repeated: false,
                 };
                 list.items = [newItem, ...list.items];
-                this.dispatchEvent(
-                    new CustomEvent("lists-changed", {
-                        bubbles: true,
-                        composed: true,
-                        detail: { lists: this.lists },
-                    })
-                );
-            }
-        })
 
+            }
+        });
+        this.dispatchEvent(
+            new CustomEvent("lists-changed", {
+                bubbles: true,
+                composed: true,
+                detail: { lists: this.lists },
+            })
+        );
     }
 }
 

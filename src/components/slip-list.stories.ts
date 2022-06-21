@@ -6,6 +6,11 @@ import type { SlipList } from "./slip-list";
 export default {
     title: "Components/Slip List",
     component: "slip-list",
+    parameters: {
+        actions: {
+            handles: ['value-changed'],
+        },
+    },
 } as Meta;
 
 const Template: Story<SlipList> = ({  }) => {

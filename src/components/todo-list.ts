@@ -7,6 +7,7 @@
 import { LitElement, html, css, nothing } from "lit";
 import { customElement, property, state, query } from "lit/decorators.js";
 import "./todo-list-item";
+import "./slip-list";
 
 export interface List {
   id: string;
@@ -359,7 +360,7 @@ export class TodoList extends LitElement {
               </div>`
             : nothing}
 
-            <div id="example1">
+            <slip-list>
               ${this.list.items.map(
                 (item) => html`<todo-list-item
                   @name-changed=${(e: CustomEvent) => {
@@ -380,7 +381,7 @@ export class TodoList extends LitElement {
                 ></todo-list-item>`
               )}
           
-          </div>
+            </slip-list>
         `;
   }
 

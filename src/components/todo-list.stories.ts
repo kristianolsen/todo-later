@@ -6,6 +6,11 @@ import type { TodoList } from "./todo-list";
 export default {
   title: "Components/Todo List",
   component: "todo-list",
+  parameters: {
+    actions: {
+      handles: ['value-changed'],
+    },
+  },
 } as Meta;
 
 const Template: Story<TodoList> = ({ list }) => html`<todo-list

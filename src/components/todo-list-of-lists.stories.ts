@@ -6,6 +6,11 @@ import type { TodoListOfLists } from "./todo-list-of-lists";
 export default {
   title: "Components/Todo List Of Lists",
   component: "todo-list-of-lists",
+  parameters: {
+    actions: {
+      handles: ['lists-changed'],
+    },
+  },
 } as Meta;
 
 const Template: Story<TodoListOfLists> = ({ lists }) => html`<todo-list-of-lists
