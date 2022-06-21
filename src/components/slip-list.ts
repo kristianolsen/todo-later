@@ -1,5 +1,5 @@
 import {customElement, state} from "lit/decorators";
-import {css, html, LitElement} from "lit";
+import {css, html, LitElement, nothing, svg, TemplateResult} from "lit";
 import {styleMap} from "lit-html/directives/style-map.js";
 import {property} from "lit/decorators.js";
 
@@ -62,10 +62,18 @@ interface Target {
 
 interface Stage {
     percent: number;
-    icon: string;
+    icon: TemplateResult<2>;
     text: string;
     color: string;
 }
+
+// From https://www.veryicon.com/icons/miscellaneous/eva-icon-fill
+const checkmarkIcon = svg`<svg class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M853.333333 504.746667a42.666667 42.666667 0 0 0-42.666666 42.666666v237.653334a25.6 25.6 0 0 1-25.6 25.6H238.933333a25.6 25.6 0 0 1-25.6-25.6V238.933333a25.6 25.6 0 0 1 25.6-25.6h408.32a42.666667 42.666667 0 1 0 0-85.333333H238.933333A111.36 111.36 0 0 0 128 238.933333v546.133334A111.36 111.36 0 0 0 238.933333 896h546.133334a111.36 111.36 0 0 0 110.933333-110.933333v-237.653334a42.666667 42.666667 0 0 0-42.666667-42.666666z"  /><path d="M457.386667 469.333333a42.666667 42.666667 0 0 0-61.44 58.88l94.72 99.413334a42.666667 42.666667 0 0 0 30.72 13.226666 42.666667 42.666667 0 0 0 30.72-12.8l289.28-298.666666a42.666667 42.666667 0 1 0-61.44-59.733334l-258.133334 267.093334z"  /></svg>`;
+
+const postponeIcon = svg`<svg class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M887.04 483.84l-142.506667-285.013333A128 128 0 0 0 629.76 128H394.24a128 128 0 0 0-114.773333 70.826667l-142.506667 285.013333a85.333333 85.333333 0 0 0-8.96 38.4V768a128 128 0 0 0 128 128h512a128 128 0 0 0 128-128v-245.76a85.333333 85.333333 0 0 0-8.96-38.4zM355.84 236.8a42.666667 42.666667 0 0 1 38.4-23.466667h235.52a42.666667 42.666667 0 0 1 38.4 23.466667L784.213333 469.333333H682.666667a42.666667 42.666667 0 0 0-42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-42.666667 42.666667h-170.666666a42.666667 42.666667 0 0 1-42.666667-42.666667v-85.333333a42.666667 42.666667 0 0 0-42.666667-42.666667H239.786667z"  /></svg>`;
+
+const deleteIcon = svg`<svg class="svg-icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M896 256h-213.333333V184.746667A103.253333 103.253333 0 0 0 576 85.333333h-128A103.253333 103.253333 0 0 0 341.333333 184.746667V256H128a42.666667 42.666667 0 0 0 0 85.333333h42.666667v469.333334a128 128 0 0 0 128 128h426.666666a128 128 0 0 0 128-128V341.333333h42.666667a42.666667 42.666667 0 0 0 0-85.333333zM426.666667 682.666667a42.666667 42.666667 0 0 1-85.333334 0v-170.666667a42.666667 42.666667 0 0 1 85.333334 0z m0-497.92c0-6.826667 8.96-14.08 21.333333-14.08h128c12.373333 0 21.333333 7.253333 21.333333 14.08V256h-170.666666zM682.666667 682.666667a42.666667 42.666667 0 0 1-85.333334 0v-170.666667a42.666667 42.666667 0 0 1 85.333334 0z"  /></svg>`;
+
 
 /**
     Slip - swiping and reordering in lists of elements on touch screens, no fuss.
@@ -160,7 +168,7 @@ interface Stage {
 export class SlipList extends LitElement {
     private mouseHandlersAttached=false;
 
-    private options = { keepSwipingPercent: 0, minimumSwipeVelocity: 1, minimumSwipeTime: 110, ignoredElements: [] };
+    private options = { keepSwipingPercent: 0, minimumSwipeVelocity: 0.1, minimumSwipeTime: 110, ignoredElements: [] };
 
         constructor() {
         super();
@@ -178,7 +186,6 @@ export class SlipList extends LitElement {
     }
 
     createIdleState: () => InteractionState = () =>  {
-            console.log('createIdleState')
         this.removeMouseHandlers();
         if (this.target) {
             this.target.node.style.willChange = '';
@@ -202,6 +209,11 @@ export class SlipList extends LitElement {
         left:0;
         right: 0;
         background-color: green;
+        padding: 8px 20px;
+        display:flex;
+        align-items:center;
+        line-height: 3;
+        vertical-align: middle;
     }
     
     `;
@@ -210,25 +222,42 @@ export class SlipList extends LitElement {
     @property({ type: Array })
     stages: Stage[] = [
         {
-            percent: 25,
-            text: 'Delete',
-            color: 'red',
-            icon: ''
+            percent: -25,
+            text: 'Postpone',
+            color: 'blue',
+            icon: postponeIcon
         },
         {
-            percent: -25,
+            percent: -50,
+            text: 'Delete',
+            color: 'red',
+            icon: deleteIcon
+        },
+        {
+            percent: 25,
             text: 'Done',
             color: 'green',
-            icon: ''
+            icon: checkmarkIcon
         }
     ];
+    arrayMax(arr: number[]): number {
+        return arr.reduce((p, v) => (p > v ? p : v), 0);
+    }
+
+    findStage(percent: number): Stage |  undefined {
+        const s = this.stages
+            .filter(x => Math.sign(x.percent) === Math.sign(percent))
+            .filter(x => Math.abs(x.percent) <= Math.abs(percent));
+
+        const maxValue = this.arrayMax(s.map(x => Math.abs(x.percent)));
+
+        return s.find(x => {
+            return Math.round(Math.abs(x.percent)) === Math.round(maxValue);
+        });
+    }
 
     private get currentStage(): Stage |  undefined {
-        const s = this.stages
-            .filter(s => Math.sign(s.percent) === Math.sign(this.swipePercent))
-            .filter(s => Math.abs(s.percent) < Math.abs(this.swipePercent))
-
-        return s[0];
+      return this.findStage(this.swipePercent);
     }
 
     @state()
@@ -248,9 +277,12 @@ export class SlipList extends LitElement {
             backgroundColor: s !== undefined ? s.color : 'transparent',
         };
 
+        const icon = s !== undefined && this.swipePercent < 0 ? s.icon : nothing;
+        const lefticon = s !== undefined && this.swipePercent > 0  ? s.icon : nothing;
 
         return html`
-            <div style="${styleMap(divStyleMap)}">${s !== undefined ? s.text : ''} ${this.swipePercent}</div>
+            
+            <div style="${styleMap(divStyleMap)}">${lefticon} ${s !== undefined ? s.text : ''} ${icon}</div>
             
             
             <slot></slot>`;
@@ -358,7 +390,6 @@ export class SlipList extends LitElement {
 
 
     createReorderState: () => InteractionState = () => {
-        console.log('createReorderState')
 
         if (this.target === undefined) {
             throw new Error('Illegal State');
@@ -564,7 +595,6 @@ export class SlipList extends LitElement {
 
 
     createSwipeState: () => InteractionState = () => {
-        console.log('createSwipeState')
 
         if (this.target === undefined) {
             throw new Error('Illegal State');
@@ -645,10 +675,14 @@ export class SlipList extends LitElement {
                 const swipedPercent = Math.abs((this.startPosition.x - this.previousPosition.x) / this.clientWidth) * 100;
 
                 const swiped = (velocity > this.options.minimumSwipeVelocity && move.time > this.options.minimumSwipeTime) || (this.options.keepSwipingPercent && swipedPercent > this.options.keepSwipingPercent);
+                console.log('swiped', swiped, velocity, move.time, this.options.keepSwipingPercent, swipedPercent)
 
                 if (swiped) {
-                    if (this.dispatch(this.target.node, 'swipe', {direction: move.directionX, originalIndex: originalIndex})) {
-                        swipeSuccess = true; // can't animate here, leaveState overrides anim
+                    const stage = this.currentStage;
+                    if (stage !== undefined) {
+                        if (this.dispatch(this.target.node, 'swipe', {direction: move.directionX, originalIndex: originalIndex, action: stage.text})) {
+                            swipeSuccess = true; // can't animate here, leaveState overrides anim
+                        }
                     }
                 } else {
                     this.dispatch(this.target.node, 'cancelswipe', {});
@@ -661,7 +695,6 @@ export class SlipList extends LitElement {
 
 
     createUndecidedState: () => InteractionState = () => {
-        console.log('createUndecidedState')
 
         if (this.target === undefined) {
             throw new Error('Illegal State');
@@ -701,7 +734,6 @@ export class SlipList extends LitElement {
                 }
                 const move = this.getAbsoluteMovement();
 
-                console.log(move, this.target.height)
                 if (move.x > 20 && move.y < Math.max(100, this.target.height)) {
                     if (this.dispatch(this.target.originalTarget, 'beforeswipe', {directionX: move.directionX, directionY: move.directionY})) {
                         this.setState(this.createSwipeState);
@@ -791,7 +823,6 @@ export class SlipList extends LitElement {
 
         const d = this.renderRoot.querySelector('div');
         if (d !== null) {
-            console.log(d);
             const t = targetNode as HTMLElement;
             d.style.top = t.offsetTop + 'px';
             d.style.height = t.offsetHeight + 'px';
@@ -908,7 +939,6 @@ export class SlipList extends LitElement {
     }
 
     dispatch(targetNode: HTMLElement, eventName: string, detail: any) {
-        console.log(eventName, detail, targetNode);
         let event = new CustomEvent('slip-' + eventName, { bubbles: true, cancelable: true, detail});
         return targetNode.dispatchEvent(event);
     }

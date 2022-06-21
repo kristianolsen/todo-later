@@ -10,4 +10,10 @@ Mangler
 
 1. Add lists
 2. Add item
-3. 
+3. Rename list
+4. Rename item
+5. Toggle item repeat
+6. Postpone item
+7. Check item
+8. Delete item
+9. Reorder item

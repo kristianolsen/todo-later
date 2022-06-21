@@ -360,7 +360,26 @@ export class TodoList extends LitElement {
               </div>`
             : nothing}
 
-            <slip-list>
+            <slip-list
+                    @slip-swipe=${(e: CustomEvent) => {
+                        e.stopPropagation();
+                        this.swipeAction(e.detail.originalIndex, e.detail.action);
+                    }}
+                    @slip-reorder=${(e: CustomEvent) => {
+                        e.stopPropagation();
+                        /* TODO Make reorder smoother?
+                        if (e.target !== null) {
+                            const t = e.target as HTMLElement;
+                            if (t.parentNode !== null)
+                            {
+                                t.parentNode.insertBefore(t, e.detail.insertBefore);
+                            }
+                        }
+                        
+                         */
+                        this.swipeReorder(e.detail.originalIndex, e.detail.spliceIndex);
+                    }}
+            >
               ${this.list.items.map(
                 (item) => html`<todo-list-item
                   @name-changed=${(e: CustomEvent) => {
@@ -459,17 +478,26 @@ export class TodoList extends LitElement {
       })
     );
   }
-  private dispatchDelete(item: ListItem) {
-    this.dispatchEvent(
-      new CustomEvent("delete", {
-        bubbles: true,
-        composed: true,
-        detail: { id: item.id },
-      })
-    );
-  }
+    private dispatchDelete(item: ListItem) {
+        this.dispatchEvent(
+            new CustomEvent("delete", {
+                bubbles: true,
+                composed: true,
+                detail: { id: item.id },
+            })
+        );
+    }
+    private dispatchReorder(item: ListItem, originalIndex: number, spliceIndex: number ) {
+        this.dispatchEvent(
+            new CustomEvent("reorder", {
+                bubbles: true,
+                composed: true,
+                detail: { id: item.id, originalIndex: originalIndex, spliceIndex: spliceIndex },
+            })
+        );
+    }
 
-  private itemNameChanged(item: ListItem, name: string) {
+    private itemNameChanged(item: ListItem, name: string) {
     this.dispatchEvent(
       new CustomEvent("item-name-changed", {
         bubbles: true,
@@ -488,6 +516,30 @@ export class TodoList extends LitElement {
       })
     );
   }
+
+    private swipeAction(originalIndex: number, action: string) {
+      console.log(originalIndex, action);
+      if (this.list !== undefined) {
+          const item = this.list.items[originalIndex];
+          if (item) {
+              switch (action) {
+                  case 'Delete': this.dispatchDelete(item); break;
+                  case 'Postpone': this.toggleLater(item); break;
+                  case 'Done': this.checkUpdated(item, !item.checked); break;
+              }
+          }
+
+      }
+    }
+
+    private swipeReorder(originalIndex: number, spliceIndex: number) {
+        if (this.list !== undefined) {
+            const item = this.list.items[originalIndex];
+            if (item) {
+                this.dispatchReorder(item, originalIndex, spliceIndex);
+            }
+        }
+    }
 }
 
 declare global {

@@ -8,7 +8,7 @@ export default {
   component: "todo-list",
   parameters: {
     actions: {
-      handles: ['value-changed'],
+      handles: ['later-updated'],
     },
   },
 } as Meta;

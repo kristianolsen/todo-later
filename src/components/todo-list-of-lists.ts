@@ -68,6 +68,7 @@ export class TodoListOfLists extends LitElement {
           @later-updated=${(e: CustomEvent) =>
                 this.laterUpdated(list.id, e.detail.id, e.detail.later)}
           @delete=${(e: CustomEvent) => this.deleteItem(list.id, e.detail.id)}
+          @reorder=${(e: CustomEvent) => this.reorderItem(list.id, e.detail.originalIndex, e.detail.spliceIndex)}
           @item-name-changed=${(e: CustomEvent) =>
                 this.itemNameChanged(list.id, e.detail.id, e.detail.name)}
           @item-repeated-changed=${(e: CustomEvent) =>
@@ -287,6 +288,28 @@ export class TodoListOfLists extends LitElement {
                 bubbles: true,
                 composed: true,
                 detail: { lists: this.lists },
+            })
+        );
+    }
+
+    private reorderItem(listId: string, originalIndex: number, spliceIndex: number) {
+        if (this.lists === undefined) return;
+        this.lists = produce(this.lists, draft => {
+            const list = draft.find((l) => l.id === listId);
+            if (list !== undefined) {
+                const itemsArray = list.items;
+                const movedItem = itemsArray[originalIndex];
+                itemsArray.splice(originalIndex, 1); // Remove item from the previous position
+                itemsArray.splice(spliceIndex, 0, movedItem); // Insert item in the new position
+
+                list.items = itemsArray;
+            }
+        });
+        this.dispatchEvent(
+            new CustomEvent("lists-changed", {
+                bubbles: true,
+                composed: true,
+                detail: {lists: this.lists},
             })
         );
     }
