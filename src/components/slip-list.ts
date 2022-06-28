@@ -1,9 +1,6 @@
-import {customElement, state} from "lit/decorators";
 import {css, html, LitElement, nothing, svg, TemplateResult} from "lit";
 import {styleMap} from "lit-html/directives/style-map.js";
-import {property} from "lit/decorators.js";
-
-
+import {property, customElement, state} from "lit/decorators.js";
 
 const damnYouChrome = /Chrome\/[3-5]/.test(navigator.userAgent); // For bugs that can't be programmatically detected :( Intended to catch all versions of Chrome 30-40
 

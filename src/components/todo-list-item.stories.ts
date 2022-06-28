@@ -16,12 +16,10 @@ export default {
 const Template: Story<TodoListItem> = ({
   label,
   checked,
-  edit,
   repeated,
 }) => html`<todo-list-item
   .label=${label}
   ?checked=${checked}
-  ?edit=${edit}
   ?repeated=${repeated}
 ></todo-list-item>`;
 
@@ -29,17 +27,14 @@ export const Default = Template.bind({});
 Default.args = {
   label: "Sample item",
   checked: false,
-  edit: false,
 };
 export const Checked = Template.bind({});
 Checked.args = {
   label: "Sample item",
   checked: true,
-  edit: false,
 };
 export const Edit = Template.bind({});
 Edit.args = {
   label: "Sample item",
   checked: false,
-  edit: true,
 };

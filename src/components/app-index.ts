@@ -13,6 +13,13 @@ import { attachRouter, urlForName } from "../router/index.js";
 import "pwa-helper-components/pwa-install-button.js";
 import "pwa-helper-components/pwa-update-available.js";
 
+import { registerSW } from 'virtual:pwa-register';
+
+registerSW({
+  onOfflineReady() { console.log('ready') },
+});
+
+
 @customElement("app-index")
 export class AppIndex extends LitElement {
   @query("main")
