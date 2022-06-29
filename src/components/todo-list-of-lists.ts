@@ -30,6 +30,19 @@ export class TodoListOfLists extends LitElement {
 
     h1 {
         padding: 1rem;
+       
+    }
+    
+    .header {
+        display: flex; 
+        justify-content: space-between;
+        position: sticky;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 100;
+        background-color: wheat;
+        
     }
   `;
 
@@ -84,7 +97,7 @@ export class TodoListOfLists extends LitElement {
 
     override render() {
         return html`
-      <div style="display: flex; justify-content: space-between;">
+      <div class="header" >
         <h1 @click=${() => (this.showNow = !this.showNow)}>
           Todo ${this.showNow ? html`Now` : html`Later`}
         </h1>

@@ -13,30 +13,29 @@ export default {
   },
 } as Meta;
 
+function sampleList(name: string, itemCount: number) {
+  const items = new Array(itemCount).fill(null).map((_, i) => {
+    const n = i + 1;
+    return {
+      id: name.toLowerCase()+ "-" + n,
+      name: "Sample " + n + " in " + name,
+      checked: i % 3 === 0,
+      later: false,
+      repeated: false,
+    };
+  });
+  return {
+    id: name.toLowerCase(),
+    name: name,
+    items: items,
+  }
+}
+
 const Template: Story<TodoListOfLists> = ({ lists }) => html`<todo-list-of-lists
   .lists=${lists}
 ></todo-list-of-lists>`;
 
 export const Default = Template.bind({});
 Default.args = {
-  lists: [{
-    id: "a",
-    name: "Økonomi",
-    items: [
-      {
-        id: "b",
-        name: "Hesten",
-        checked: false,
-        later: false,
-        repeated: false,
-      },
-      {
-        id: "c",
-        name: "Legetimer",
-        checked: true,
-        later: false,
-        repeated: false,
-      },
-    ],
-  }],
+  lists: [sampleList("Økonomi", 5), sampleList("Arbeid", 5)],
 };
