@@ -111,7 +111,7 @@ export class PageHome extends PageElement {
                   };
                 }),
             };
-          }),
+          }).filter((list) => list.items.length > 0),
         };
 
         this.data = updatedData;

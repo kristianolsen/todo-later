@@ -206,11 +206,15 @@ export class SlipList extends LitElement {
         left:0;
         right: 0;
         background-color: green;
-        padding: 8px 20px;
+        padding: 0 20px;
         display:flex;
         align-items:center;
         line-height: 3;
         vertical-align: middle;
+    }
+    
+    div svg {
+        padding: 5px;
     }
     
     `;
@@ -269,8 +273,9 @@ export class SlipList extends LitElement {
 
         const s = this.currentStage;
         const divStyleMap = {
-            display: this.stateConstructor === this.createSwipeState ? 'block' : 'none',
+            display: this.stateConstructor === this.createSwipeState ? 'flex' : 'none',
             textAlign: this.swipePercent > 0 ? 'left' : 'right',
+            justifyContent: this.swipePercent > 0 ? 'left' : 'right',
             backgroundColor: s !== undefined ? s.color : 'transparent',
         };
 
@@ -358,7 +363,7 @@ export class SlipList extends LitElement {
             y: e.clientY,
             time: e.timeStamp,
         });
-    }
+    };
 
     get _slottedChildren() {
         const slot = this.renderRoot.querySelector('slot');
@@ -821,8 +826,9 @@ export class SlipList extends LitElement {
         const d = this.renderRoot.querySelector('div');
         if (d !== null) {
             const t = targetNode as HTMLElement;
-            d.style.top = t.offsetTop + 'px';
+             d.style.top = t.offsetTop + 'px';
             d.style.height = t.offsetHeight + 'px';
+            console.log(t.style, d.style)
         }
         // scrollContainer may be explicitly set via options, otherwise search upwards for a parent with an overflow-y property
         // fallback to document.scrollingElement (or documentElement on IE), and do not use document.body

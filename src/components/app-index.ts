@@ -14,6 +14,7 @@ import "pwa-helper-components/pwa-install-button.js";
 import "pwa-helper-components/pwa-update-available.js";
 
 import { registerSW } from 'virtual:pwa-register';
+import Hammer from 'hammerjs';
 
 registerSW({
   onOfflineReady() { console.log('ready') },
@@ -27,10 +28,19 @@ export class AppIndex extends LitElement {
 
   static override styles = css`
     :host {
-      display: flex;
-      flex-direction: column;
+      /* grid container settings */
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas: 
+    'header'
+    'main'
+    'footer';
+      
+      height: 100vh;
     }
     header {
+      grid-area: header;
       display: none;
       align-items: center;
       height: 53px;
@@ -55,13 +65,12 @@ export class AppIndex extends LitElement {
     header nav a:hover {
       color: #bbb;
     }
-    main,
-    main > * {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
+    main {
+      grid-area: main;
+      overflow: auto;
     }
     footer {
+      grid-area: footer;
       padding: 1rem;
       background-color: #eee;
       text-align: center;
@@ -87,10 +96,19 @@ export class AppIndex extends LitElement {
       </header>
       <!-- The main content is added / removed dynamically by the router -->
       <main role="main"></main>
+      <footer><a href="${urlForName("home")}">List</a>
+        <a href="${urlForName("about")}">History</a></footer>
     `;
   }
 
   override firstUpdated() {
     attachRouter(this.main);
+    if (Date.now() === 0) {
+      const hammertime = new Hammer(this.main)
+      hammertime.get('pinch').set({ enable: true });
+      hammertime.on('pinch', function(ev: HammerInput) {
+        console.log(ev);
+      });
+    }
   }
 }
